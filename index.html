@@ -2,11 +2,45 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>mr4h4 | Mini-Universe</title>
+  <title>mr4h4 | Mini Universe</title>
+  <link id="favicon" rel="icon" href="/mr4h4.ico" />  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="universe"></canvas>
-  <script src="script.js"></script>
+<!-- Botón simple -->
+    <button id="toggle-controls">☰</button>
+
+    <!-- Panel de controles -->
+    <div id="controls">
+        <label>Gravity: <span id="g-value"></span></label>
+        <input type="range" id="g-slider" min="0.01" max="0.2" step="0.01" value="0.05">
+
+        <label>Roche Limit: <span id="roche-value"></span></label>
+        <input type="range" id="roche-slider" min="1000" max="20000" step="500" value="12000">
+
+        <label>Trail Duration: <span id="trail-value"></span></label>
+        <input type="range" id="trail-slider" min="500" max="5000" step="100" value="2000">
+
+        <label>Fragment Speed: <span id="frag-speed-value"></span></label>
+        <input type="range" id="frag-speed-slider" min="0.5" max="10" step="0.1" value="4">
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById("toggle-controls");
+        const controls = document.getElementById("controls");
+
+        let open = true; // panel abierto por defecto
+
+        toggleBtn.addEventListener("click", () => {
+            open = !open;
+            if(open){
+                controls.classList.remove("closed");
+            } else {
+                controls.classList.add("closed");
+            }
+        });
+    </script>
+    <canvas id="universe"></canvas>
+    <script src="script.js"></script>
 </body>
 </html>

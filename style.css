@@ -1,3 +1,4 @@
+/* Reset y base */
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +8,97 @@
 body {
   background: #000;
   overflow: hidden;
+  font-family: sans-serif;
 }
 
 canvas {
   display: block;
+}
+
+/* Panel de controles */
+#controls {
+  position: fixed;
+  top: calc(2vh + clamp(35px, 4vw, 50px) + 1.5vh);
+  right: 2vw;
+  background: rgba(0,0,0,0.6);
+  padding: 2vh 2vw;
+  border-radius: 1.5vh;
+  color: white;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: clamp(180px, 20vw, 300px); /* mínimo, adaptable, máximo */
+  font-size: clamp(0.8rem, 1.2vw, 1rem); /* escala con pantalla */
+  transition: transform 0.3s ease;
+  height: auto;
+  max-height: calc(100vh - (2vh + clamp(35px, 4vw, 50px) + 1.5vh) - 2vh);
+  overflow-y: auto;
+}
+
+/* Mueve el panel fuera de la pantalla cuando está cerrado */
+#controls.closed {
+  transform: translateX(105%);
+}
+
+/* Labels y sliders */
+#controls label {
+  display: block;
+  margin: 1vh 0 0.5vh 0;
+}
+
+#controls input[type="range"] {
+  width: 100%; /* se adapta al ancho del panel */
+  margin-bottom: 1.5vh;
+}
+
+/* Botón hamburguesa */
+#toggle-controls {
+  position: fixed;
+  top: 2vh;
+  margin: 5px;
+  right: 2vw; /* posición inicial cuando el panel está cerrado */
+  z-index: 20;
+  width: clamp(35px, 4vw, 50px);
+  height: clamp(35px, 4vw, 50px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  border-radius: 0.8vh;
+  color: white;
+  font-size: clamp(18px, 3vw, 28px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s, right 0.3s; /* right añadido */
+}
+
+/* Hover */
+#toggle-controls:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Mueve el botón un poco cuando el panel está abierto */
+#toggle-controls.panel-open {
+  right: calc(2vw + clamp(180px, 20vw, 300px) + 10px); /* panel width + margen */
+}
+
+/* Responsive: pantallas pequeñas */
+@media (max-width: 500px) {
+  #controls {
+    width: 80vw;
+    padding: 2vh 4vw;
+    font-size: 0.8rem;
+  }
+
+  #toggle-controls {
+    width: 12vw;
+    height: 12vw;
+    font-size: 6vw;
+  }
+
+  #toggle-controls.panel-open {
+    right: calc(2vw + 80vw + 10px);
+  }
 }
